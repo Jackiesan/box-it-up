@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { organizationFetch } from '../actions';
 import { connect } from 'react-redux';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
-import { CapitalizedText, CardSection } from './common'
+import { CapitalizedText, CardSection } from './common';
+import { MapView } from 'expo';
+
+const Marker = MapView.Marker;
+
 
 class Organization extends Component {
 
@@ -14,6 +18,22 @@ class Organization extends Component {
     const props = this.props.organization
     return (
       <View style={styles.background}>
+        <MapView
+         style={ styles.container }
+         initialRegion={{
+           latitude: props.latitude,
+           longitude: props.longitude,
+           latitudeDelta: 0.0922,
+           longitudeDelta: 0.0421
+         }}
+        >
+
+        <Marker
+          title={this.props.organization.charityName}
+          coordinate={{latitude: this.props.organization.latitude, longitude: this.props.organization.longitude}}
+        />
+        </MapView>
+
         <CardSection style={styles.card}>
           <Text style={styles.titleStyle}>
             {props.charityName}
@@ -51,6 +71,10 @@ const styles = {
   },
   card: {
     justifyContent: 'center'
+  },
+  container: {
+    width: '100%',
+    height: 150,
   }
 }
 
