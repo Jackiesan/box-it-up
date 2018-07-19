@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { organizationFetch } from '../actions';
 import { connect } from 'react-redux';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
-import { CapitalizedText, CardSection } from './common';
+import { CapitalizedText, CardSection, MapCallout } from './common';
 import { MapView } from 'expo';
 import MissionStatement from './MissionStatement'
-
 
 class Organization extends Component {
 
@@ -27,7 +26,7 @@ class Organization extends Component {
 
   render() {
     const props = this.props.organization
-    const { charityName} = this.props.organization;
+    const { charityName, street} = this.props.organization;
     return (
       <View style={styles.background}>
       <View style={ styles.container }>
@@ -49,10 +48,21 @@ class Organization extends Component {
       >
 
       <MapView.Marker
-      title={this.props.organization.charityName}
+      // title={this.props.organization.charityName}
+      // description={props.street}
       coordinate={{
         latitude: this.props.organization.latitude, longitude: this.props.organization.longitude
-      }}>
+      }}
+      >
+        <MapView.Callout>
+          <MapCallout
+            street={street}
+            city={props.city}
+            state={props.state}
+            zipCode={props.zipCode}
+          />
+        </MapView.Callout>
+
       </MapView.Marker>
       </MapView>
       </View>
