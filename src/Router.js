@@ -3,6 +3,7 @@ import { Scene, Router, Actions } from 'react-native-router-flux';
 import CategoryList from './components/CategoryList';
 import Category from './components/Category';
 import Organization from './components/Organization';
+import Fullmap from './components/Fullmap'
 import Home from './components/Home';
 import { Text } from 'react-native';
 import TabIcon from './components/TabIcon';
@@ -41,6 +42,11 @@ const RouterComponent = () => {
             <Scene
               key="organization"
               component={Organization}
+            />
+
+            <Scene
+              key="fullmap"
+              component={Fullmap}
             />
 
           </Scene>

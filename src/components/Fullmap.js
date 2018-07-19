@@ -1,40 +1,22 @@
 import React, { Component } from 'react';
 import { organizationFetch } from '../actions';
-import { Scene, Router, Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
 import { CapitalizedText, CardSection, MapCallout } from './common';
 import { MapView } from 'expo';
-import MissionStatement from './MissionStatement'
 
-class Organization extends Component {
+class Fullmap extends Component {
 
   componentDidMount() {
     this.props.organizationFetch(this.props.ein)
-  }
-
-  checkMissionStatement() {
-    if (this.props.organization.missionStatement) {
-      return (
-        <CardSection style={styles.mission}>
-        <MissionStatement
-          statement={this.props.organization.missionStatement}
-        />
-        </CardSection>
-      )
-    }
   }
 
   render() {
     const props = this.props.organization
     const { charityName, street, ein} = this.props.organization;
     return (
-      <View style={styles.background}>
-      <View style={ styles.container }>
-      <TouchableWithoutFeedback
-        onPress={() => Actions.fullmap({ein: ein, title: charityName })}
-      >
       <MapView
+
       style={ styles.map }
       initialRegion={{
         latitude: this.props.organization.latitude,
@@ -51,28 +33,24 @@ class Organization extends Component {
       >
 
       <MapView.Marker
-
       coordinate={{
         latitude: this.props.organization.latitude, longitude: this.props.organization.longitude
       }}
-      />
+      >
+        <MapView.Callout>
+          <MapCallout
+            street={street}
+            city={props.city}
+            state={props.state}
+            zipCode={props.zipCode}
+            latitude={props.latitude}
+            longitude={props.longitude}
+            charityName={props.charityName}
+          />
+        </MapView.Callout>
+
+      </MapView.Marker>
       </MapView>
-      </TouchableWithoutFeedback>
-
-      </View>
-
-      <CardSection style={styles.title}>
-
-      <Text style={styles.titleStyle}>
-      {charityName}
-      </Text>
-      </CardSection>
-
-
-
-      {this.checkMissionStatement()}
-
-      </View>
     );
   }
 }
@@ -97,35 +75,8 @@ const styles = {
     overflow: 'hidden',
     backgroundColor: '#007AFF'
   },
-  titleStyle: {
-    fontSize: 24,
-    textAlign: 'center',
-    paddingTop: 20,
-    paddingBottom: 20,
-    color: '#230C0F'
-  },
-  background: {
-    flex: 1,
-  },
-  title: {
-    justifyContent: 'center',
-    backgroundColor: '#A2D3C2'
-  },
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-    height: 150,
-  },
   map: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-  mission: {
-    backgroundColor: '#F2EFC7'
+    flex: 1
   }
 }
 
@@ -134,4 +85,4 @@ const mapStateToProps = (state, ownProps) => {
   return { organization: state.organization }
 }
 
-export default connect(mapStateToProps, {organizationFetch})(Organization);
+export default connect(mapStateToProps, {organizationFetch})(Fullmap);
