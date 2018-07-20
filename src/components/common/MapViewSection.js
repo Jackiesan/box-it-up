@@ -11,32 +11,30 @@ class MapViewSection extends Component {
 
     return (
       <View style={ styles.container }>
-      <TouchableWithoutFeedback
-        onPress={() => Actions.fullmap({ein: ein, title: charityName })}
-      >
-      <MapView
-      style={ styles.map }
-      initialRegion={{
-        latitude: latitude,
-        longitude: longitude,
-        latitudeDelta: 0.0992,
-        longitudeDelta: 0.0421
-      }}
-      region={{
-        latitude: latitude,
-        longitude: longitude,
-        latitudeDelta: 0.0992,
-        longitudeDelta: 0.0421
-      }}
-      >
-
-      <MapView.Marker
-
-      coordinate={{
-        latitude: latitude, longitude: longitude
-      }}
-      />
-      </MapView>
+        <TouchableWithoutFeedback
+          onPress={() => Actions.fullmap({ein: ein, title: charityName })}
+        >
+          <MapView
+            style={ styles.map }
+            initialRegion={{
+              latitude: latitude,
+              longitude: longitude,
+              latitudeDelta: 0.0992,
+              longitudeDelta: 0.0421
+            }}
+            region={{
+              latitude: latitude,
+              longitude: longitude,
+              latitudeDelta: 0.0992,
+              longitudeDelta: 0.0421
+            }}
+          >
+            <MapView.Marker
+              coordinate={{
+                latitude: latitude, longitude: longitude
+              }}
+            />
+          </MapView>
       </TouchableWithoutFeedback>
 
       </View>

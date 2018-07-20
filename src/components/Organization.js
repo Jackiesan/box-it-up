@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { organizationFetch } from '../actions';
 import { connect } from 'react-redux';
-import { Text, View } from 'react-native';
-import { CardSection, MapViewSection } from './common';
+import { Text, View, Linking } from 'react-native';
+import { CardSection, MapViewSection, SmallButton, ColumnCard } from './common';
 import MissionStatement from './MissionStatement'
 
 class Organization extends Component {
@@ -23,9 +23,33 @@ class Organization extends Component {
     }
   }
 
+  onButtonPress() {
+    return (
+      Linking.openURL(this.props.organization.amazonWishlist)
+    )
+  }
+
+  onMonetaryPress() {
+    return (
+      Linking.openURL(this.props.organization.donationUrl)
+    )
+  }
+
+  checkWishlist() {
+    if
+    (this.props.organization.amazonWishlist) {
+      return (
+          <SmallButton
+            onPress={this.onButtonPress.bind(this)}>
+              Amazon Wishlist
+          </SmallButton>
+      )
+    }
+  }
+
   render() {
     const props = this.props.organization
-    const { charityName, street, ein} = this.props.organization;
+    const { charityName, street, ein, amazonWishlist, donationUrl } = this.props.organization;
     return (
       <View style={styles.background}>
         <MapViewSection
@@ -40,6 +64,13 @@ class Organization extends Component {
         </CardSection>
 
         {this.checkMissionStatement()}
+          <ColumnCard style={styles.buttons}>
+            <SmallButton onPress={this.onMonetaryPress.bind(this)}>
+              Monetary Donation
+            </SmallButton>
+            {this.checkWishlist()}
+          </ColumnCard>
+
 
       </View>
     );
@@ -82,6 +113,10 @@ const styles = {
   },
   mission: {
     backgroundColor: '#F2EFC7'
+  },
+  buttons: {
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 }
 
