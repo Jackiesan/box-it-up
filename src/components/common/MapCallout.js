@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Linking } from 'react-native';
-import {CapitalizedText} from './CapitalizedText';
 
 class MapCallout extends Component {
 
@@ -25,7 +24,6 @@ class MapCallout extends Component {
         </Text>
       </View>
       </TouchableOpacity>
-
     );
   }
 }

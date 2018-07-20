@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { organizationFetch } from '../actions';
-import { Scene, Router, Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { Text, TouchableWithoutFeedback, View } from 'react-native';
-import { CapitalizedText, CardSection, MapCallout } from './common';
-import { MapView } from 'expo';
+import { Text, View } from 'react-native';
+import { CardSection, MapViewSection } from './common';
 import MissionStatement from './MissionStatement'
 
 class Organization extends Component {
@@ -30,47 +28,18 @@ class Organization extends Component {
     const { charityName, street, ein} = this.props.organization;
     return (
       <View style={styles.background}>
-      <View style={ styles.container }>
-      <TouchableWithoutFeedback
-        onPress={() => Actions.fullmap({ein: ein, title: charityName })}
-      >
-      <MapView
-      style={ styles.map }
-      initialRegion={{
-        latitude: this.props.organization.latitude,
-        longitude: this.props.organization.longitude,
-        latitudeDelta: 0.0992,
-        longitudeDelta: 0.0421
-      }}
-      region={{
-        latitude: this.props.organization.latitude,
-        longitude: this.props.organization.longitude,
-        latitudeDelta: 0.0992,
-        longitudeDelta: 0.0421
-      }}
-      >
+        <MapViewSection
+          organization={props}
+        />
 
-      <MapView.Marker
+        <CardSection style={styles.title}>
 
-      coordinate={{
-        latitude: this.props.organization.latitude, longitude: this.props.organization.longitude
-      }}
-      />
-      </MapView>
-      </TouchableWithoutFeedback>
+        <Text style={styles.titleStyle}>
+        {charityName}
+        </Text>
+        </CardSection>
 
-      </View>
-
-      <CardSection style={styles.title}>
-
-      <Text style={styles.titleStyle}>
-      {charityName}
-      </Text>
-      </CardSection>
-
-
-
-      {this.checkMissionStatement()}
+        {this.checkMissionStatement()}
 
       </View>
     );
@@ -110,19 +79,6 @@ const styles = {
   title: {
     justifyContent: 'center',
     backgroundColor: '#A2D3C2'
-  },
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-    height: 150,
-  },
-  map: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
   },
   mission: {
     backgroundColor: '#F2EFC7'
