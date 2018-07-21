@@ -21,8 +21,14 @@ const RouterComponent = () => {
             <Scene
               key="home"
               component={Home}
-              title="Home"
             />
+
+            <Scene
+              key="organization"
+              component={Organization}
+              title="Organization Profile"
+            />
+
           </Scene>
 
           <Scene key="donate" title="Donate"
