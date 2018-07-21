@@ -11,4 +11,4 @@ const CapitalizedText = (props) => {
   );
 };
 
-export {CapitalizedText};
+export { CapitalizedText };

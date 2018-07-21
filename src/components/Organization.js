@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { organizationFetch } from '../actions';
 import { connect } from 'react-redux';
-import { Text, View, Linking } from 'react-native';
-import { CardSection, MapViewSection, SmallButton, ColumnCard } from './common';
+import { Text, View, Linking, ScrollView } from 'react-native';
+import { CardSection, MapViewSection, SmallButton, ColumnCard, Details } from './common';
 import MissionStatement from './MissionStatement'
 
 class Organization extends Component {
@@ -15,9 +15,9 @@ class Organization extends Component {
     if (this.props.organization.missionStatement) {
       return (
         <CardSection style={styles.mission}>
-        <MissionStatement
-          statement={this.props.organization.missionStatement}
-        />
+          <MissionStatement
+            statement={this.props.organization.missionStatement}
+          />
         </CardSection>
       )
     }
@@ -49,8 +49,9 @@ class Organization extends Component {
 
   render() {
     const props = this.props.organization
-    const { charityName, street, ein, amazonWishlist, donationUrl } = this.props.organization;
+    const { charityName, street, ein, amazonWishlist, donationUrl, website } = this.props.organization;
     return (
+      <ScrollView>
       <View style={styles.background}>
         <MapViewSection
           organization={props}
@@ -64,15 +65,30 @@ class Organization extends Component {
         </CardSection>
 
         {this.checkMissionStatement()}
-          <ColumnCard style={styles.buttons}>
+
+        <Text style={styles.subtitle}>
+          INFO
+        </Text>
+
+        <Details
+          website={website}
+        />
+
+        <Text style={styles.subtitle}>
+          MORE
+        </Text>
+        <ColumnCard>
+          <View style={styles.buttons}>
             <SmallButton onPress={this.onMonetaryPress.bind(this)}>
               Monetary Donation
             </SmallButton>
             {this.checkWishlist()}
-          </ColumnCard>
+          </View>
+        </ColumnCard>
 
 
       </View>
+      </ScrollView>
     );
   }
 }
@@ -98,11 +114,11 @@ const styles = {
     backgroundColor: '#007AFF'
   },
   titleStyle: {
-    fontSize: 24,
+    fontSize: 26,
     textAlign: 'center',
     paddingTop: 20,
     paddingBottom: 20,
-    color: '#230C0F'
+    color: '#230C0F',
   },
   background: {
     flex: 1,
@@ -112,11 +128,19 @@ const styles = {
     backgroundColor: '#A2D3C2'
   },
   mission: {
-    backgroundColor: '#F2EFC7'
+    backgroundColor: '#F2EFC7',
+    marginTop: 10,
+    borderTopWidth: 1,
+    borderColor: '#ddd',
   },
   buttons: {
     alignItems: 'center',
-    justifyContent: 'center'
+  },
+  subtitle: {
+    paddingLeft: 10,
+    paddingTop: 25,
+    paddingBottom: 5,
+    color: 'rgb(117, 117, 117)'
   }
 }
 

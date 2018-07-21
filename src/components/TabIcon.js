@@ -11,8 +11,6 @@ class TabIcon extends Component {
         <Icon
           name={this.props.iconName}
           type={this.props.type}
-          size={this.props.size}
-          color='black'
         />
       </View>
     );

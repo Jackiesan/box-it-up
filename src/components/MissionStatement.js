@@ -23,7 +23,7 @@ export default MissionStatement;
 
 const styles = {
   mission: {
-    fontSize: 15,
+    fontSize: 20,
     fontWeight: 'bold',
     padding: 5,
     alignItems: 'center',
@@ -32,10 +32,13 @@ const styles = {
   missionStyle: {
     fontStyle: 'italic',
     padding: 10,
+    fontSize: 16
   },
   missionContainer: {
     alignItems: 'center',
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingTop: 20,
+    paddingBottom: 20
   }
 }
