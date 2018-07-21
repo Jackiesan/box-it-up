@@ -17,7 +17,7 @@ const RouterComponent = () => {
           tabs={true}
           tabBarStyle={{ backgroundColor: '#FFFFFF' }}
         >
-          <Scene key="all" title="All Charities" iconName="list" icon={TabIcon} >
+          <Scene key="all" title="Local Charities" iconName="list" icon={TabIcon} >
             <Scene
               key="home"
               component={Home}
