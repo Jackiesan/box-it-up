@@ -1,10 +1,12 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ListView, Text } from 'react-native';
+import { ListView, Text, View } from 'react-native';
 import { selectCategory } from '../actions';
 import OrganizationItem from './OrganizationItem'
 import { Actions } from 'react-native-router-flux';
+import { sortBy } from '../helpers/sorted';
+import { getDistance } from '../helpers/calculateDistance';
 
 class Category extends Component {
 
@@ -32,20 +34,29 @@ class Category extends Component {
   }
 
   render() {
+    console.log(this.props.organizations);
     return (
+      <View>
       <ListView
         dataSource={this.dataSource}
         renderRow={this.renderRow}
         keyExtractor={(organization) => organization.id}
       />
+      </View>
     );
   }
 }
 
 const mapStateToProps = state => {
-  const organizations = _.map(state.organizations, (val) => {
-    return { ...val };
+  const setDistance = (x, y, a, b) => {
+    const miles = getDistance(x, y, a, b)
+    return miles
+  }
+
+  const orgs = _.map(state.organizations, (val, longitute, latitude) => {
+    return { ...val, distance: setDistance(47.608013, -122.335167, 47.608013, -122.335167 ) };
   });
+  const organizations = sortBy(orgs,'longitude')
   return { organizations }
 };
 

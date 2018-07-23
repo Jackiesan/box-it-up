@@ -19,13 +19,14 @@ class Home extends Component {
       },
     locationResult: null,
     location:
-      { coords:
-        {
-          latitude: 37.78825,
-          longitude: -122.4324
-        }
-      },
-    };
+      {
+        coords:
+      {
+        latitude: 37.78825,
+        longitude: -122.4324
+      }
+    }
+  };
 
   componentDidMount() {
     this.props.coordinatesFetch();
@@ -50,6 +51,7 @@ class Home extends Component {
   };
 
   render() {
+    console.log(this.state.location.coords);
     return (
       <MapView
         style={{ flex: 1 }}
