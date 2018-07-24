@@ -5,11 +5,6 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "cover"
-    },
-    "ios": {
-       "config": {
-        "googleMapsApiKey": "AIzaSyCnUJZWwexXuH3ZKMDuGFxTrE0svpcBnRc",
-       }
     }
   }
 }

@@ -5,7 +5,7 @@ import { Text, View } from 'react-native';
 import { coordinatesFetch } from '../actions';
 import { MapView, Constants, Location, Permissions } from 'expo';
 import { HomeCallout } from './common';
-
+import Pulse from 'react-native-pulse';
 
 class Home extends Component {
 
@@ -85,10 +85,13 @@ class Home extends Component {
       )}
 
       <MapView.Marker
+
         coordinate={this.state.location.coords}
         title="My Location"
       >
         <View style={styles.radius}>
+        <Pulse color='rgb(84, 161, 232)' numPulses={1} diameter={500} speed={20} duration={1} />
+
           <View style={styles.marker} />
         </View>
       </MapView.Marker>

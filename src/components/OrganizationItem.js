@@ -16,12 +16,12 @@ class OrganizationItem extends Component {
         onPress={() => Actions.organization({ein: ein, title: "Organization Profile" })}
       >
         <View>
-          <CardSection>
+          <CardSection style={styles.section}>
             <View>
-            <CapitalizedText>
+            <CapitalizedText style={styles.name}>
               {charityName}
             </CapitalizedText>
-            <Text>
+            <Text style={styles.mile}>
               {_.round(distance, 1)} mi
             </Text>
             </View>
@@ -40,10 +40,23 @@ class OrganizationItem extends Component {
 }
 
 const styles = {
+  section: {
+    paddingTop: 6,
+    paddingBottom: 6,
+    paddingLeft: 10
+  },
+  mile: {
+    color: 'rgb(79, 79, 79)',
+
+  },
+  name: {
+    fontSize: 17,
+    fontWeight: '500',
+    paddingBottom: 4
+  },
   titleStyle: {
     fontSize: 20,
     paddingLeft: 15,
-
   },
   icon: {
     paddingLeft: 8,
