@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { organizationFetch } from '../actions';
 import { connect } from 'react-redux';
 import { Text, View, Linking, ScrollView } from 'react-native';
-import { CardSection, MapViewSection, SmallButton, ColumnCard, Details } from './common';
-import MissionStatement from './MissionStatement'
+import { CardSection, MapViewSection, SmallButton, ColumnCard } from './common';
+import MissionStatement from './MissionStatement';
+import Details from './Details';
 
 class Organization extends Component {
 
@@ -22,6 +23,7 @@ class Organization extends Component {
       )
     }
   }
+
 
   onButtonPress() {
     return (
@@ -49,7 +51,7 @@ class Organization extends Component {
 
   render() {
     const props = this.props.organization
-    const { charityName, street, ein, amazonWishlist, donationUrl, website } = this.props.organization;
+    const { charityName, street, ein, amazonWishlist, donationUrl, website, state, city, zipCode } = this.props.organization;
     return (
       <ScrollView>
       <View style={styles.background}>
@@ -66,12 +68,12 @@ class Organization extends Component {
 
         {this.checkMissionStatement()}
 
-        <Text style={styles.subtitle}>
-          INFO
-        </Text>
-
         <Details
           website={website}
+          street={street}
+          city={city}
+          zipCode={zipCode}
+          state={state}
         />
 
         <Text style={styles.subtitle}>

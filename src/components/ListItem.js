@@ -4,16 +4,21 @@ import { CategorySection } from './common';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import { Actions } from 'react-native-router-flux';
+import { locationFetch } from '../actions';
+
 import images from './images'
 
 class ListItem extends Component {
-
+  componentDidMount() {
+    this.props.locationFetch();
+  }
 
   render() {
     const { id, name, image_url } = this.props.category;
+    const {location} = this.props.location
     return (
       <TouchableWithoutFeedback
-      onPress={() => Actions.category({id: id, title: name})}
+      onPress={() => Actions.category({id: id, title: name, location: location})}
       >
       <View>
       <CategorySection style={styles.sectionStyle}>
@@ -47,8 +52,9 @@ const styles = {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return { selectCategoryId: state.id }
+  const location = state.location
+  return { selectCategoryId: state.id, location }
 
 };
 
-export default connect(mapStateToProps, actions)(ListItem);
+export default connect(mapStateToProps,  {actions, locationFetch})(ListItem);

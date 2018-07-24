@@ -8,5 +8,4 @@ export * from './MapCallout';
 export * from './MapViewSection';
 export * from './SmallButton';
 export * from './ColumnCard.js';
-export * from './Details.js';
 export * from './HomeCallout.js';

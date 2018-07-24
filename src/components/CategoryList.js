@@ -7,29 +7,10 @@ import ListItem from './ListItem';
 
 class CategoryList extends Component {
 
-  state = {
-    mapRegion:
-      {
-        latitude: 37.78825,
-        longitude: -122.4324,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421
-      },
-    locationResult: null,
-    location:
-      {
-        coords:
-      {
-        latitude: 37.78825,
-        longitude: -122.4324
-      }
-    }
-  };
-
   componentWillMount() {
     this.props.categoriesFetch();
     this.createDataSource(this.props);
-    this._getLocationAsync();
+    this.props.locationFe
   }
 
   componentWillReceiveProps(nextProps) {
@@ -50,29 +31,10 @@ class CategoryList extends Component {
     />;
   }
 
-  _handleMapRegionChange = mapRegion => {
-    this.setState({ mapRegion });
-  }
-
-  _getLocationAsync = async () => {
-   let { status } = await Permissions.askAsync(Permissions.LOCATION);
-   if (status !== 'granted') {
-     this.setState({
-       locationResult: 'Permission to access location was denied',
-       location,
-     });
-   }
-
-   let location = await Location.getCurrentPositionAsync({});
-   this.setState({ locationResult: JSON.stringify(location), location, });
-  };
-
-
   render() {
-    console.log(this.state.location.coords);
-
     return (
       <ListView
+        enableEmptySections={true}
         contentContainerStyle={styles.list}
         dataSource={this.dataSource}
         renderRow={this.renderRow}

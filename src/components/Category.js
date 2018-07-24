@@ -9,11 +9,23 @@ import { sortBy } from '../helpers/sorted';
 import { getDistance } from '../helpers/calculateDistance';
 
 class Category extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      location: {
+        coords: {
+          latitude: '',
+          longitude: ''
+        }
+      }
+    };
+  }
 
   componentWillMount() {
+    this.props.locationFetch();
     this.props.selectCategory(this.props.id);
     this.createDataSource(this.props);
-    this.props.locationFetch();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -55,8 +67,10 @@ const mapStateToProps = state => {
   }
 
   const orgs = _.map(state.organizations, (val) => {
-    return { ...val, distance: getDistance(val.latitude, val.longitude, state.location.coords.latitude, state.location.coords.longitude) };
+    if (state.location) {
+    return { ...val, distance: getDistance(val.latitude, val.longitude, state.location.coords.latitude, state.location.coords.longitude) }}
   });
+
   const organizations = sortBy(orgs,'distance')
   return { organizations, location: state.location }
 };
