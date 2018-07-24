@@ -4,21 +4,28 @@ import { CardSection, CapitalizedText } from './common';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import { Actions } from 'react-native-router-flux';
-import TabIcon from './TabIcon'
+import TabIcon from './TabIcon';
+import _ from 'lodash';
 
 class OrganizationItem extends Component {
 
   render() {
-    const { ein, charityName } = this.props.organization;
+    const { ein, charityName, distance } = this.props.organization;
     return (
       <TouchableWithoutFeedback
         onPress={() => Actions.organization({ein: ein, title: "Organization Profile" })}
       >
         <View>
           <CardSection>
+            <View>
             <CapitalizedText>
               {charityName}
-            </CapitalizedText >
+            </CapitalizedText>
+            <Text>
+              {_.round(distance, 1)} mi
+            </Text>
+            </View>
+
             <View style={styles.icon}>
               <TabIcon
                 iconName='angle-right'

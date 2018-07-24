@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ListView, Text, View } from 'react-native';
-import { selectCategory } from '../actions';
+import { selectCategory, locationFetch } from '../actions';
 import OrganizationItem from './OrganizationItem'
 import { Actions } from 'react-native-router-flux';
 import { sortBy } from '../helpers/sorted';
@@ -13,6 +13,7 @@ class Category extends Component {
   componentWillMount() {
     this.props.selectCategory(this.props.id);
     this.createDataSource(this.props);
+    this.props.locationFetch();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -53,11 +54,11 @@ const mapStateToProps = state => {
     return miles
   }
 
-  const orgs = _.map(state.organizations, (val, longitute, latitude) => {
-    return { ...val, distance: setDistance(47.608013, -122.335167, 47.608013, -122.335167 ) };
+  const orgs = _.map(state.organizations, (val) => {
+    return { ...val, distance: getDistance(val.latitude, val.longitude, state.location.coords.latitude, state.location.coords.longitude) };
   });
-  const organizations = sortBy(orgs,'longitude')
-  return { organizations }
+  const organizations = sortBy(orgs,'distance')
+  return { organizations, location: state.location }
 };
 
-export default connect(mapStateToProps, {selectCategory})(Category);
+export default connect(mapStateToProps, {selectCategory, locationFetch})(Category);
