@@ -45,7 +45,6 @@ class MapViewSection extends Component {
   render() {
 
     const {charityName, street, ein, latitude, longitude} = this.props.organization;
-    console.log(latitude);
     return (
       <View style={ styles.container }>
         {this.checkLatitude()}

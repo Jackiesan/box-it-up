@@ -7,7 +7,7 @@ class MapCallout extends Component {
     const { street, city, state, zipCode, charityName } = this.props
     return (
       <TouchableOpacity onPress={() => Linking.openURL(`maps://app?daddr=${street}+${city}+${state}+${zipCode}`)}>
-      <View>
+      <View style={{flex: 1}}>
         <Text style={styles.title}>
           {charityName}
         </Text>

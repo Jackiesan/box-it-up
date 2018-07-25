@@ -35,7 +35,6 @@ class Category extends Component {
   }
 
   render() {
-    console.log(this.props.organizations);
     return (
       <View>
       <ListView
