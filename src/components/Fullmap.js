@@ -9,8 +9,8 @@ import Pulse from 'react-native-pulse';
 class Fullmap extends Component {
 
   componentDidMount() {
-    this.props.organizationFetch(this.props.ein)
     this.props.locationFetch();
+    this.props.organizationFetch(this.props.ein)
   }
 
   render() {

@@ -24,7 +24,7 @@ export default MissionStatement;
 const styles = {
   mission: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: '500',
     padding: 5,
     alignItems: 'center',
     justifyContent: 'center'

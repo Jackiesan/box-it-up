@@ -30,6 +30,11 @@ const RouterComponent = () => {
               title="Organization Profile"
             />
 
+            <Scene
+              key="fullmap"
+              component={Fullmap}
+            />
+
           </Scene>
 
           <Scene key="donate" title="Donate"
