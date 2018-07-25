@@ -10,7 +10,6 @@ class CategoryList extends Component {
   componentWillMount() {
     this.props.categoriesFetch();
     this.createDataSource(this.props);
-    this.props.locationFe
   }
 
   componentWillReceiveProps(nextProps) {

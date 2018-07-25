@@ -51,7 +51,6 @@ class Home extends Component {
   };
 
   render() {
-    console.log(this.state.location.coords);
     return (
       <MapView
         style={{ flex: 1 }}
@@ -71,7 +70,7 @@ class Home extends Component {
           <MapView.Marker
             key={marker.ein}
             coordinate={{
-              latitude: marker.latitude, longitude: marker.longitude
+              latitude: parseFloat(marker.latitude), longitude: parseFloat(marker.longitude)
             }}
           >
             <MapView.Callout style={styles.callout}>

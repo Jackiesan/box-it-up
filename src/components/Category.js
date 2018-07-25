@@ -9,18 +9,6 @@ import { sortBy } from '../helpers/sorted';
 import { getDistance } from '../helpers/calculateDistance';
 
 class Category extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      location: {
-        coords: {
-          latitude: '',
-          longitude: ''
-        }
-      }
-    };
-  }
 
   componentWillMount() {
     this.props.locationFetch();
@@ -51,6 +39,7 @@ class Category extends Component {
     return (
       <View>
       <ListView
+        enableEmptySections={true}
         dataSource={this.dataSource}
         renderRow={this.renderRow}
         keyExtractor={(organization) => organization.id}

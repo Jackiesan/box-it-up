@@ -5,38 +5,47 @@ import { MapView } from 'expo';
 
 class MapViewSection extends Component {
 
+  checkLatitude() {
+    const {charityName, street, ein, latitude, longitude} = this.props.organization;
+
+    if (this.props.organization.latitude) {
+      return (
+        <TouchableWithoutFeedback
+        onPress={() => Actions.fullmap({ein: ein, title: charityName })}
+        >
+        <MapView
+        style={ styles.map }
+        initialRegion={{
+          latitude: latitude,
+          longitude: longitude,
+          latitudeDelta: 0.0992,
+          longitudeDelta: 0.0421
+        }}
+        region={{
+          latitude: latitude,
+          longitude: longitude,
+          latitudeDelta: 0.0992,
+          longitudeDelta: 0.0421
+        }}
+        >
+        <MapView.Marker
+        coordinate={{
+          latitude: latitude, longitude: longitude
+        }}
+        />
+        </MapView>
+        </TouchableWithoutFeedback>
+      )
+    }
+  }
+
   render() {
 
     const {charityName, street, ein, latitude, longitude} = this.props.organization;
-
+    console.log(latitude);
     return (
       <View style={ styles.container }>
-        <TouchableWithoutFeedback
-          onPress={() => Actions.fullmap({ein: ein, title: charityName })}
-        >
-          <MapView
-            style={ styles.map }
-            initialRegion={{
-              latitude: latitude,
-              longitude: longitude,
-              latitudeDelta: 0.0992,
-              longitudeDelta: 0.0421
-            }}
-            region={{
-              latitude: latitude,
-              longitude: longitude,
-              latitudeDelta: 0.0992,
-              longitudeDelta: 0.0421
-            }}
-          >
-            <MapView.Marker
-              coordinate={{
-                latitude: latitude, longitude: longitude
-              }}
-            />
-          </MapView>
-      </TouchableWithoutFeedback>
-
+        {this.checkLatitude()}
       </View>
     )
   }
