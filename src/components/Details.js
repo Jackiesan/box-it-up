@@ -9,8 +9,11 @@ class Details extends Component {
   checkWebsite() {
     if (this.props.website) {
       return (
+        <View>
+        <Text style={styles.subtitle}>
+          WEBSITE
+        </Text>
         <CardSection>
-
         <View style={styles.section}>
           <Icon
           name='external-link'
@@ -23,6 +26,7 @@ class Details extends Component {
           </Text>
         </View>
         </CardSection>
+        </View>
 
       )
     }
@@ -34,11 +38,11 @@ class Details extends Component {
         ADDRESS
       </Text>
       <CardSection>
-        <View>
-          <Text>
+        <View style={styles.address}>
+          <Text style={styles.add}>
           {this.props.street}
           </Text>
-          <Text>
+          <Text style={styles.add}>
             {this.props.city}, {this.props.state} {this.props.zipCode}
           </Text>
         </View>
@@ -73,5 +77,14 @@ const styles = {
     paddingTop: 25,
     paddingBottom: 5,
     color: 'rgb(117, 117, 117)'
+  },
+  address: {
+    flexDirection: 'column',
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
+  },
+  add: {
+    fontSize: 15
   }
 }

@@ -15,11 +15,13 @@ class Organization extends Component {
   checkMissionStatement() {
     if (this.props.organization.missionStatement) {
       return (
+        <View>
         <CardSection style={styles.mission}>
           <MissionStatement
             statement={this.props.organization.missionStatement}
           />
         </CardSection>
+        </View>
       )
     }
   }
@@ -87,8 +89,6 @@ class Organization extends Component {
             {this.checkWishlist()}
           </View>
         </ColumnCard>
-
-
       </View>
       </ScrollView>
     );
