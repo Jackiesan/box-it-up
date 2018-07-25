@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { organizationFetch } from '../actions';
+import { organizationFetch, fetchCategories } from '../actions';
 import { connect } from 'react-redux';
-import { Text, View, Linking, ScrollView } from 'react-native';
+import { Text, View, Linking, ScrollView, FlatList, ListItem } from 'react-native';
 import { CardSection, MapViewSection, SmallButton, ColumnCard } from './common';
 import MissionStatement from './MissionStatement';
 import Details from './Details';
@@ -10,6 +10,7 @@ class Organization extends Component {
 
   componentDidMount() {
     this.props.organizationFetch(this.props.ein)
+    this.props.fetchCategories(this.props.id)
   }
 
   checkMissionStatement() {
@@ -51,6 +52,17 @@ class Organization extends Component {
     }
   }
 
+  mapCategories() {
+    const categories = this.props.categories
+    return (
+      <FlatList data={categories} renderItem={
+            ({item}) => <Text style={styles.category}>{item.name}</Text>
+          }
+          keyExtractor={(item, index) => index.toString()}
+
+        />);
+  }
+
   render() {
     const props = this.props.organization
     const { charityName, street, ein, amazonWishlist, donationUrl, website, state, city, zipCode } = this.props.organization;
@@ -89,6 +101,13 @@ class Organization extends Component {
             {this.checkWishlist()}
           </View>
         </ColumnCard>
+
+        <Text style={styles.subtitle}>
+          ACCEPTING PRODUCTS
+        </Text>
+        <CardSection>
+          {this.mapCategories()}
+        </CardSection>
       </View>
       </ScrollView>
     );
@@ -125,12 +144,17 @@ const styles = {
     paddingTop: 25,
     paddingBottom: 5,
     color: 'rgb(117, 117, 117)'
+  },
+  category: {
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 10,
   }
 }
 
 
 const mapStateToProps = (state, ownProps) => {
-  return { organization: state.organization }
+  return { organization: state.organization, categories: state.categoriesoforg }
 }
 
-export default connect(mapStateToProps, {organizationFetch})(Organization);
+export default connect(mapStateToProps, {organizationFetch, fetchCategories})(Organization);

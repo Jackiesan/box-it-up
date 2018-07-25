@@ -10,10 +10,10 @@ import _ from 'lodash';
 class OrganizationItem extends Component {
 
   render() {
-    const { ein, charityName, distance } = this.props.organization;
+    const { ein, charityName, distance, id } = this.props.organization;
     return (
       <TouchableWithoutFeedback
-        onPress={() => Actions.organization({ein: ein, title: "Organization Profile" })}
+        onPress={() => Actions.organization({ein: ein, title: "Organization Profile", id: id })}
       >
         <View>
           <CardSection style={styles.section}>
