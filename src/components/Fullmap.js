@@ -14,19 +14,22 @@ class Fullmap extends Component {
   render() {
     const props = this.props.organization
     const { charityName, street, ein} = this.props.organization;
+    const latitude = parseFloat(this.props.organization.latitude)
+    const longitude = parseFloat(this.props.organization.longitude)
+
     return (
       <MapView
 
       style={ styles.map }
       initialRegion={{
-        latitude: this.props.organization.latitude,
-        longitude: this.props.organization.longitude,
+        latitude: latitude,
+        longitude: longitude,
         latitudeDelta: 0.0992,
         longitudeDelta: 0.0421
       }}
       region={{
-        latitude: this.props.organization.latitude,
-        longitude: this.props.organization.longitude,
+        latitude: latitude,
+        longitude: longitude,
         latitudeDelta: 0.0992,
         longitudeDelta: 0.0421
       }}
@@ -34,7 +37,7 @@ class Fullmap extends Component {
 
       <MapView.Marker
       coordinate={{
-        latitude: this.props.organization.latitude, longitude: this.props.organization.longitude
+        latitude: latitude, longitude: longitude
       }}
       >
         <MapView.Callout>

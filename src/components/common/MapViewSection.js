@@ -6,7 +6,10 @@ import { MapView } from 'expo';
 class MapViewSection extends Component {
 
   checkLatitude() {
-    const {charityName, street, ein, latitude, longitude} = this.props.organization;
+    const {charityName, street, ein} = this.props.organization;
+    const latitude = parseFloat(this.props.organization.latitude)
+    const longitude = parseFloat(this.props.organization.longitude)
+
 
     if (this.props.organization.latitude) {
       return (
