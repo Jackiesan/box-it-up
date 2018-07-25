@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Linking, TouchableOpacity } from 'react-native';
 import {CardSection} from './common';
 import { Icon } from 'react-native-elements';
 
@@ -9,6 +9,7 @@ class Details extends Component {
   checkWebsite() {
     if (this.props.website) {
       return (
+        <TouchableOpacity onPress={() => Linking.openURL(`http://${this.props.website}`)}>
         <View>
         <Text style={styles.subtitle}>
           WEBSITE
@@ -27,7 +28,7 @@ class Details extends Component {
         </View>
         </CardSection>
         </View>
-
+        </TouchableOpacity>
       )
     }
   }
