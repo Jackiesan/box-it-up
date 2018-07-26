@@ -7,9 +7,9 @@ import { organizationFetch } from '../../actions';
 class HomeCallout extends Component {
 
   render() {
-    const { charityName, ein } = this.props
+    const { charityName, ein, id } = this.props
     return (
-      <TouchableOpacity onPress={() => Actions.organization({ein: ein})}
+      <TouchableOpacity onPress={() => Actions.organization({ein: ein, id: id})}
       >
       <View style={{flex: 1}}>
         <Text style={styles.title}>

@@ -8,7 +8,6 @@ import Home from './components/Home';
 import { Text } from 'react-native';
 import TabIcon from './components/TabIcon';
 console.ignoredYellowBox = ['Remote debugger'];
-
 const RouterComponent = () => {
   return (
     <Router>

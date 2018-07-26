@@ -7,7 +7,7 @@ import MissionStatement from './MissionStatement';
 import Details from './Details';
 
 class Organization extends Component {
-
+  
   componentDidMount() {
     this.props.organizationFetch(this.props.ein)
     this.props.fetchCategories(this.props.id)
